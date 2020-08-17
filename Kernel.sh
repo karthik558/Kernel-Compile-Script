@@ -1,7 +1,7 @@
 #!/bin/bash
 export ARCH=arm64
 export SUBARCH=arm64
-TC_DIR="/home/karthiksp/Kernel"
+TC_DIR="/home/"username"/Kernel"
 MPATH="$TC_DIR/CLANG/bin/:$PATH"
 rm -f out/arch/arm64/boot/Image.gz-dtb
 make O=out vendor/violet-perf_defconfig
@@ -17,8 +17,8 @@ PATH="$MPATH" make -j4 O=out \
         STRIP=llvm-strip
         2>&1 | tee error.log
 
-cp out/arch/arm64/boot/Image.gz-dtb /home/karthiksp/Kernel/Anykernel
-cd /home/karthiksp/Kernel/Anykernel
+cp out/arch/arm64/boot/Image.gz-dtb /home/"username"/Kernel/Anykernel
+cd /home/"username"/Kernel/Anykernel
 if [ -f "Image.gz-dtb" ]; then
     zip -r9 Ryzen+-violet-"$DATE".zip * -x .git README.md *placeholder
     echo "Build success!"
