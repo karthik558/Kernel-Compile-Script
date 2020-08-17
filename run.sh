@@ -1,3 +1,5 @@
+<<<< Basic Script to build kernel >>>>
+
 #!/bin/bash
 export ARCH=arm64
 export SUBARCH=arm64
