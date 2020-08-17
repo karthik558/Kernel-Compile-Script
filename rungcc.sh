@@ -1,3 +1,4 @@
+<<<< This is GCC building Kernel Script >>>>
 #!/bin/bash
 export ARCH=arm64
 export SUBARCH=arm64
@@ -18,9 +19,3 @@ PATH="$MPATH" make -j4 O=out \
         OBJDUMP=llvm-objdump \
         STRIP=llvm-strip
         2>&1 | tee error.log
-        
-        
-        
-        
-      
-
