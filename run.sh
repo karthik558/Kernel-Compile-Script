@@ -1,7 +1,7 @@
 #!/bin/bash
 export ARCH=arm64
 export SUBARCH=arm64
-TC_DIR="/home/karthiksp/Kernel"
+TC_DIR="/home/"username"/Kernel"
 MPATH="$TC_DIR/CLANG/bin/:$PATH"
 rm -f out/arch/arm64/boot/Image.gz-dtb
 make O=out vendor/violet-perf_defconfig
@@ -16,13 +16,3 @@ PATH="$MPATH" make -j4 O=out \
         OBJDUMP=llvm-objdump \
         STRIP=llvm-strip
         2>&1 | tee error.log
-
-cp out/arch/arm64/boot/Image.gz-dtb flasher/ 2>/dev/null
-cd flasher
-if [ -f "Image.gz-dtb" ]; then
-    zip -r Karthik++-$(date).zip *
-    mv Karthik++*.zip ..
-    echo "Build success!"
-else
-    echo "Build failed!"
-fi
