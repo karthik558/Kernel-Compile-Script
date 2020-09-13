@@ -28,4 +28,12 @@ AR=llvm-ar \
         OBJDUMP=llvm-objdump \
         STRIP=llvm-strip      - This are kernel need files
         
-2>&1 | tee error.log  - save logs    
+2>&1 | tee error.log  - save logs 
+
+cp out/arch/arm64/boot/Image.gz-dtb /home/ubuntu/Kernel/Anykernel - Copying your compiled kernel image zip to Flasher/Anykernel
+
+cd /home/ubuntu/Kernel/Anykernel - Entering to the Flasher script
+
+if [ -f "Image.gz-dtb" ]; then
+    zip -r9 Ryzen+-violet-"$DATE".zip * -x .git README.md *placeholder  - Change the name of the device and the first name according to your wish
+    
