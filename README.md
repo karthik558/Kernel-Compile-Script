@@ -1,6 +1,14 @@
 #This is a repo of scripts that i am using for building kernel
 
-Explaining the script
+HOW TO USE THIS SCRIPT
+
+- git clone https://github.com/karthik558/My-Scripts- Script
+
+- chmod +x "script".sh
+
+- ./"script".sh
+
+<<< Explaining the script components >>>
 
 export ARCH=arm64 - Change according to your device 
 
