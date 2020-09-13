@@ -4,6 +4,8 @@ HOW TO USE THIS SCRIPT
 
 - git clone https://github.com/karthik558/My-Scripts- Script
 
+- cd Script
+
 - chmod +x "script".sh
 
 - ./"script".sh
