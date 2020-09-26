@@ -24,8 +24,15 @@ cd /home/ubuntu/Kernel/Anykernel
 if [ -f "Image.gz-dtb" ]; then
     zip -r9 Ryzen+-violet-"$DATE".zip * -x .git README.md *placeholder
 cp /home/ubuntu/Kernel/Anykernel/Ryzen+-violet-"$DATE".zip /home/ubuntu/Kernel
+
+#Clonning GDrive to Main DIR
+wget https://www.dropbox.com/s/w65lffvkkqvvj93/gdrive?dl=1
+mv gdrive?dl=1 gdrive 
+chmod +x gdrive  
 ./gdrive list
-./upload yzen+-violet-"$DATE".zip
+./gdrive upload filename
+./gdrive list 
+./gdrive upload Ryzen+-violet-"$DATE".zip
 
     echo "Build success!"
 else
