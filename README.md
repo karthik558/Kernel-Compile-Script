@@ -1,4 +1,4 @@
-#This is a repo of scripts that i am using for building kernel
+#Kernel Building Script that i am using.
 
 HOW TO USE THIS SCRIPT
 
