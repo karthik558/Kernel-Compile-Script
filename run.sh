@@ -1,4 +1,4 @@
-#Basic Script to build kernel 
+#Kernel-Compiling-Script 
 
 #!/bin/bash
 export ARCH=arm64
