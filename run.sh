@@ -3,6 +3,17 @@
 #!/bin/bash
 export ARCH=arm64
 export SUBARCH=arm64
+export KBUILD_BUILD_HOST="R-A-D-E-O-N"
+export KBUILD_BUILD_USER="K A R T H I K"
+MAKE="./makeparallel"
+
+BUILD_START=$(date +"%s")
+blue='\033[0;34m'
+cyan='\033[0;36m'
+yellow='\033[0;33m'
+red='\033[0;31m'
+nocol='\033[0m'
+
 TC_DIR="/home/ubuntu/Kernel"
 MPATH="$TC_DIR/clang/bin/:$PATH"
 rm -f out/arch/arm64/boot/Image.gz-dtb
@@ -27,18 +38,13 @@ cd /home/ubuntu/Kernel/Anykernel
 if [ -f "Image.gz-dtb" ]; then
     zip -r9 Ryzen+-violet-dtbo-$(TZ=Asia/Kolkata date +'%M%H-%d%m%Y').zip"* -x .git README.md *placeholder
 cp /home/ubuntu/Kernel/Anykernel/Ryzen+-violet-dtbo-$(TZ=Asia/Kolkata date +'%M%H-%d%m%Y').zip /home/ubuntu/Kernel
+rm /home/ubuntu/Kernel/Anykernel/Image.gz-dtb
+rm /home/ubuntu/Kernel/Anykernel/Ryzen+-violet-dtbo-$(TZ=Asia/Kolkata date +'%M%H-%d%m%Y').zip
 
-#Clonning GDrive to Main DIR
-wget https://www.dropbox.com/s/w65lffvkkqvvj93/gdrive?dl=1
-mv gdrive?dl=1 gdrive 
-chmod +x gdrive  
-./gdrive list
-./gdrive upload filename
-./gdrive list 
-./gdrive upload Ryzen+-violet-dtbo-$(TZ=Asia/Kolkata date +'%M%H-%d%m%Y').zip
+BUILD_END=$(date +"%s")
+DIFF=$(($BUILD_END - $BUILD_START))
+echo -e "$yellow Build completed in $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds.$nocol"
 
-elapsed=$((build_complete-build_start))
-echo "Completed Successfully in $elapsed Seconds."
     echo "Build success!"
 else
     echo "Build failed!"
