@@ -1,5 +1,0 @@
-Normal Flashing 
-zip -r9 UPDATE-AnyKernel3.zip * -x .git README.md *placeholder
-
-Flash with date and device name seperate 
-zip -r9 $ZIPNAME-$DEVICE-"$DATE".zip * -x .git README.md *placeholder
