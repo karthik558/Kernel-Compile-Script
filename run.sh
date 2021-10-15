@@ -42,18 +42,18 @@ cd /home/karthik558/Workspace/Kernel/Anykernel
 
 # Ziping Kernel using Anykernel
 if [ -f "Image.gz-dtb" ]; then
-    zip -r9 RyZeN-violet-R-$DATE.zip * -x .git README.md *placeholder
-cp /home/karthik558/Workspace/Kernel/Anykernel/RyZeN-violet-R-$DATE.zip /home/karthik558/Workspace/Kernel
-rm /home/karthik558/Workspace/Kernel/Anykernel/RyZeN-violet-R-$DATE.zip
+    zip -r9 RyZeN-violet-S-$DATE.zip * -x .git README.md *placeholder
+cp /home/karthik558/Workspace/Kernel/Anykernel/RyZeN-violet-S-$DATE.zip /home/karthik558/Workspace/Kernel
+rm /home/karthik558/Workspace/Kernel/Anykernel/RyZeN-violet-S-$DATE.zip
 rm /home/karthik558/Workspace/Kernel/Anykernel/Image.gz-dtb
 
 # Signzip using zipsigner
 cd /home/karthik558/Workspace/Kernel
 # curl -sLo zipsigner-3.0.jar https://github.com/Magisk-Modules-Repo/zipsigner/raw/master/bin/zipsigner-3.0-dexed.jar
-java -jar zipsigner-3.0.jar RyZeN-violet-R-$DATE.zip RyZeN-violet-R-$DATE-signed.zip
+java -jar zipsigner-3.0.jar RyZeN-violet-S-$DATE.zip RyZeN-violet-S-$DATE-signed.zip
 
 # Remove unsigned build
-rm RyZeN-violet-R-$DATE.zip
+rm RyZeN-violet-S-$DATE.zip
 
 # Build Completed
 BUILD_END=$(date +"%s")
