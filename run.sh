@@ -1,24 +1,27 @@
-#Kernel-Compiling-Script
+#Basic Script to build kernel
 
 #!/bin/bash
+cd RyZeN
 export ARCH=arm64
 export SUBARCH=arm64
-export KBUILD_BUILD_HOST="R-A-D-E-O-N"
+export KBUILD_BUILD_HOST="NOT-GAMING-KERNEL"
 export KBUILD_BUILD_USER="K A R T H I K"
 MAKE="./makeparallel"
 
+# Set Date
+DATE=$(TZ=Asia/Jakarta date +"%Y%m%d-%T")
+
+# For end-time
 BUILD_START=$(date +"%s")
+
 blue='\033[0;34m'
 cyan='\033[0;36m'
 yellow='\033[0;33m'
 red='\033[0;31m'
 nocol='\033[0m'
 
-# Set Date
-DATE=$(TZ=Asia/Jakarta date +"%Y%m%d-%T")
-
-TC_DIR="/home/ubuntu/Kernel"
-MPATH="$TC_DIR/clang/bin/:$PATH"
+TC_DIR="/home/karthik558/Workspace/Kernel"
+MPATH="$TC_DIR/CLANG-13/bin/:$PATH"
 rm -f out/arch/arm64/boot/Image.gz-dtb
 make O=out vendor/violet-perf_defconfig
 PATH="$MPATH" make -j16 O=out \
@@ -30,21 +33,29 @@ PATH="$MPATH" make -j16 O=out \
         CC=clang \
         AR=llvm-ar \
         OBJDUMP=llvm-objdump \
-        STRIP=llvm-strip
+        STRIP=llvm-strip \
         2>&1 | tee error.log
 
-git clone https://android.googlesource.com/platform/system/libufdt scripts/ufdt/libufdt
-python2 scripts/ufdt/libufdt/utils/src/mkdtboimg.py create out/arch/arm64/boot/dtbo.img --page_size=4096 out/arch/arm64/boot/dts/qcom/sm6150-idp-overlay.dtbo
+# Copying Image.gz-dtb to anykernel
+cp out/arch/arm64/boot/Image.gz-dtb /home/karthik558/Workspace/Kernel/Anykernel
+cd /home/karthik558/Workspace/Kernel/Anykernel
 
-cp out/arch/arm64/boot/Image.gz-dtb /home/ubuntu/Kernel/Anykernel
-cp out/arch/arm64/boot/dtbo.img /home/ubuntu/Kernel/Anykernel
-cd /home/ubuntu/Kernel/Anykernel
+# Ziping Kernel using Anykernel
 if [ -f "Image.gz-dtb" ]; then
-    zip -r9 RyZeN+-violet-R-"$DATE".zip"* -x .git README.md *placeholder
-cp /home/ubuntu/Kernel/Anykernel/RyZeN+-violet-R-"$DATE".zip /home/ubuntu/Kernel
-rm /home/ubuntu/Kernel/Anykernel/Image.gz-dtb
-rm /home/ubuntu/Kernel/Anykernel/RyZeN+-violet-R-"$DATE".zip
+    zip -r9 RyZeN-violet-R-$DATE.zip * -x .git README.md *placeholder
+cp /home/karthik558/Workspace/Kernel/Anykernel/RyZeN-violet-R-$DATE.zip /home/karthik558/Workspace/Kernel
+rm /home/karthik558/Workspace/Kernel/Anykernel/RyZeN-violet-R-$DATE.zip
+rm /home/karthik558/Workspace/Kernel/Anykernel/Image.gz-dtb
 
+# Signzip using zipsigner
+cd /home/karthik558/Workspace/Kernel
+# curl -sLo zipsigner-3.0.jar https://github.com/Magisk-Modules-Repo/zipsigner/raw/master/bin/zipsigner-3.0-dexed.jar
+java -jar zipsigner-3.0.jar RyZeN-violet-R-$DATE.zip RyZeN-violet-R-$DATE-signed.zip
+
+# Remove unsigned build
+rm RyZeN-violet-R-$DATE.zip
+
+# Build Completed
 BUILD_END=$(date +"%s")
 DIFF=$(($BUILD_END - $BUILD_START))
 echo -e "$yellow Build completed in $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds.$nocol"
