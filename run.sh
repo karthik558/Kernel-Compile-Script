@@ -20,7 +20,7 @@ yellow='\033[0;33m'
 red='\033[0;31m'
 nocol='\033[0m'
 
-TC_DIR="/home/karthik558/Workspace/Kernel"
+TC_DIR="/home/karthik558/Workspace/"
 MPATH="$TC_DIR/CLANG-13/bin/:$PATH"
 rm -f out/arch/arm64/boot/Image.gz-dtb
 make O=out vendor/violet-perf_defconfig
@@ -37,18 +37,18 @@ PATH="$MPATH" make -j16 O=out \
         2>&1 | tee error.log
 
 # Copying Image.gz-dtb to anykernel
-cp out/arch/arm64/boot/Image.gz-dtb /home/karthik558/Workspace/Kernel/Anykernel
-cd /home/karthik558/Workspace/Kernel/Anykernel
+cp out/arch/arm64/boot/Image.gz-dtb /home/karthik558/Workspace/Anykernel
+cd /home/karthik558/Workspace/Anykernel
 
 # Ziping Kernel using Anykernel
 if [ -f "Image.gz-dtb" ]; then
     zip -r9 RyZeN-violet-S-$DATE.zip * -x .git README.md *placeholder
-cp /home/karthik558/Workspace/Kernel/Anykernel/RyZeN-violet-S-$DATE.zip /home/karthik558/Workspace/Kernel
-rm /home/karthik558/Workspace/Kernel/Anykernel/RyZeN-violet-S-$DATE.zip
-rm /home/karthik558/Workspace/Kernel/Anykernel/Image.gz-dtb
+cp /home/karthik558/Workspace/Anykernel/RyZeN-violet-S-$DATE.zip /home/karthik558/Workspace/
+rm /home/karthik558/Workspace/Anykernel/RyZeN-violet-S-$DATE.zip
+rm /home/karthik558/Workspace/Anykernel/Image.gz-dtb
 
 # Signzip using zipsigner
-cd /home/karthik558/Workspace/Kernel
+cd /home/karthik558/Workspace/
 # curl -sLo zipsigner-3.0.jar https://github.com/Magisk-Modules-Repo/zipsigner/raw/master/bin/zipsigner-3.0-dexed.jar
 java -jar zipsigner-3.0.jar RyZeN-violet-S-$DATE.zip RyZeN-violet-S-$DATE-signed.zip
 
