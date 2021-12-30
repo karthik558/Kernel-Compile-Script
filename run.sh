@@ -9,7 +9,7 @@ export KBUILD_BUILD_USER="K A R T H I K"
 MAKE="./makeparallel"
 
 # Set Date
-DATE=$(TZ=Asia/Jakarta date +"%Y%m%d-%T")
+DATE=$(TZ=Asia/Jakarta date +"%Y%m%d")
 
 # For end-time
 BUILD_START=$(date +"%s")
